@@ -157,3 +157,5 @@ function formataPreco(preco) {
     currency: 'BRL'
   });
 }
+
+buscarProdutos();
