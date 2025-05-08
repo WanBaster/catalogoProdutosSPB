@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNrd3l2bWVpcnB4cWxrcHV5d2JjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTAxOTAsImV4cCI6MjA2MjI4NjE5MH0.SS_YN3hrLEdRm31p7uiyRC6SkbA_uIm1wCNusNA61AY';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabase);
 
 
 // Função para converter nomes de propriedades para padrão snake_case usado no PostgreSQL
