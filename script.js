@@ -1,5 +1,5 @@
 // Array de produtos
-const produtos = [
+/* const produtos = [
     {
         id: 1,
         nome: "Smartphone Galaxy S23",
@@ -41,7 +41,7 @@ const produtos = [
         temDesconto: false
     }
 ];
-
+ */
 
 function formataPreco(preco) {
   return preco.toLocaleString('pt-BR', 
