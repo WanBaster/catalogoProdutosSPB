@@ -5,40 +5,6 @@ const supabaseUrl = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabase);
 
 
-// Função para converter nomes de propriedades para padrão snake_case usado no PostgreSQL
-const converterParaFormatoSupabase = (produto) => {
-  return {
-    id: produto.id,
-    nome: produto.nome,
-    descricao: produto.descricao,
-    preco: produto.preco,
-    preco_original: produto.precoOriginal,
-    tem_desconto: produto.temDesconto
-  };
-};
-
-// Função para inserir os produtos no Supabase
-const inserirProdutosNoSupabase = async () => {
-  const produtosFormatados = produtos.map(converterParaFormatoSupabase);
-  
-  try {
-    const { data, error } = await supabase
-      .from('produtos')
-      .insert(produtosFormatados)
-      .select();
-    
-    if (error) {
-      console.error('Erro ao inserir produtos:', error);
-      return false;
-    }
-    
-    console.log('Produtos inseridos com sucesso:', data);
-    return true;
-  } catch (err) {
-    console.error('Erro na operação:', err);
-    return false;
-  }
-};
 
 // Função para buscar todos os produtos do Supabase
 const buscarProdutos = async () => {
@@ -110,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-// Função para carregar produtos do Supabase e renderizar na interface
+// Função para carregar produtos do Supabase
 const carregarProdutosDoSupabase = async () => {
   const produtosDoSupabase = await buscarProdutos();
   
