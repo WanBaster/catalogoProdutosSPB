@@ -5,6 +5,7 @@ const supabaseUrl = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabase);
 
 
+
 // Função para buscar todos os produtos do Supabase
 const buscarProdutos = async () => {
   try {
@@ -25,6 +26,19 @@ const buscarProdutos = async () => {
   }
 };
 
+// Função para aplicar desconto a todos os produtos
+const aplicarDescontoNoSupabase = async (percentualDesconto = 10) => {
+  try {
+    // Primeiro, buscar todos os produtos que não têm desconto
+    const { data: produtosSemDesconto, error: erroConsulta } = await supabase
+      .from('produtos')
+      .select('*')
+      .eq('tem_desconto', false);
+    
+    if (erroConsulta) {
+      console.error('Erro ao buscar produtos sem desconto:', erroConsulta);
+      return false;
+    }
     
     // Para cada produto, aplicar o desconto
     for (const produto of produtosSemDesconto) {
@@ -49,6 +63,18 @@ const buscarProdutos = async () => {
     return false;
   }
 };
+
+// Exemplo de uso das funções
+document.addEventListener('DOMContentLoaded', async () => {
+  // Inicializar a interface com os produtos do Supabase
+  await carregarProdutosDoSupabase();
+  
+  // Adicionar evento para o botão de desconto
+  document.getElementById('aplicarDesconto')?.addEventListener('click', async () => {
+    await aplicarDescontoNoSupabase();
+    await carregarProdutosDoSupabase();
+  });
+});
 
 // Função para carregar produtos do Supabase
 const carregarProdutosDoSupabase = async () => {
@@ -131,5 +157,3 @@ function formataPreco(preco) {
     currency: 'BRL'
   });
 }
-
-buscarProdutos();
